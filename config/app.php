@@ -184,8 +184,11 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
-        'JWTAuth'=> Tymon\JWTAuth\Facades\JWTAuth::class,
-        'JWTAuthFactory'=> Tymon\JWTAuth\Facades\JWTAuthFactory::class,
-        ])->toArray(),
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTAuthFactory' => Tymon\JWTAuth\Facades\JWTAuthFactory::class,
+        'jwt' => 'Tymon\JWTAuth\Providers\JWT\Namshi',
+        'auth' => 'Tymon\JWTAuth\Providers\Auth\Illuminate',
+        'storage' => 'Tymon\JWTAuth\Providers\Storage\Illuminate'
+    ])->toArray(),
 
 ];
