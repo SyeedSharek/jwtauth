@@ -114,47 +114,119 @@ class CategoryController extends Controller
 
 
 
-    public function update(Request $request, int $id)
-    {
+    // public function update($id)
+    // {
+    //     $category = Category::find($id);
+
+    //     $validator = Validator::make(
+    //         $request->all(),
+    //         [
+    //             'name' => 'required|string|unique:categories'
+    //         ]
+    //     );
+
+
+    //     if ($validator->fails()) {
+    //         return response()->json([
+
+    //             'error' => $validator->messages()
+
+    //         ]);
+    //     } else {
+
+    //         $category = Category::find($id);
+
+    //         if ($category) {
+
+    //             $category->update([
+
+    //                 'name' => $request->name
+
+
+    //             ], 200);
+
+    //             return response()->json([
+
+    //                 'message' => 'Category Successfully Update'
+    //             ]);
+    //         } else {
+    //             return response()->json([
+
+    //                 'error' => 'Update Fail'
+    //             ]);
+    //         }
+    //     }
+    // }
+
+    public function update(Request $request, $id){
 
         $validator = Validator::make(
             $request->all(),
             [
-
                 'name' => 'required|string|unique:categories'
             ]
         );
 
-
         if ($validator->fails()) {
             return response()->json([
-
                 'error' => $validator->messages()
 
             ]);
-        } else {
+        } 
+        
 
-            $category = Category::find($id);
+       
 
-            if ($category) {
+        $category = Category::find($id);
 
-                $category->update([
+        if($category){
+            
+           $category->name = $request->name;
+            $category->update();
 
-                    'name' => $request->name
 
 
-                ], 200);
+            return response()->json([
 
-                return response()->json([
+                'message' => 'Category Successfully Saved'
+            ],200);
 
-                    'message' => 'Category Successfully Update'
-                ]);
-            } else {
-                return response()->json([
-
-                    'error' => 'Update Fail'
-                ]);
-            }
         }
+        else{
+
+            return response()->json([
+
+                'message' => 'No Category Found'
+            ],404);
+        }
+
     }
+
+
+    public function delete($id)
+    {
+
+        $category = Category::find($id);
+        if($category)
+        {
+            $category->delete();
+
+            return response()->json([
+
+                'message' => 'Category Delete'
+            ],200);
+
+        }
+
+        else
+        {
+            return response()->json([
+
+                'message' => 'Category Not Found'
+            ],404);
+        }
+
+    }
+
+    
 }
