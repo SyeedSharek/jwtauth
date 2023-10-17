@@ -8,6 +8,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,3 +82,10 @@ Route::put('/area/update/{id}', [AreaController::class, 'update'])->name('area.u
 Route::delete('/area/delete/{id}', [AreaController::class, 'delete'])->name('area.delete');
 
 
+//Setting Route...............
+Route::post('/setting/index', [SettingController::class, 'index'])->name('setting.index');
+Route::post('/setting/store', [SettingController::class, 'store'])->name('setting.store');
+Route::get('/setting/show/{id}', [SettingController::class, 'show'])->name('setting.show');
+Route::get('/setting/edit/{id}', [SettingController::class, 'edit_index'])->name('setting.edit');
+Route::put('/setting/update/{id}', [SettingController::class, 'update'])->name('setting.update');
+Route::delete('/setting/delete/{id}', [SettingController::class, 'delete'])->name('setting.delete');

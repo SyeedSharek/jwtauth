@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use App\Models\SubCategory;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -16,6 +17,7 @@ class BrandController extends Controller
 
         if ($brands->count() > 0) {
             return response()->json([
+
                 'brands' => $brands
 
             ], 200);
@@ -36,7 +38,9 @@ class BrandController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'name' => 'required|string|unique:brands'
+                'subcategory_id'=>'required',
+
+                'name' => 'required|string'
             ]
         );
 
@@ -49,6 +53,7 @@ class BrandController extends Controller
 
             $brand = Brand::create([
 
+                'subcategory_id'=>$request->subcategory_id,
                 'name' => $request->name
 
 
@@ -121,6 +126,7 @@ class BrandController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
+                'subcategory_id'=>'required',
                 'name' => 'required|string|unique:brands'
             ]
         );
@@ -138,7 +144,7 @@ class BrandController extends Controller
         $brand = Brand::find($id);
 
         if($brand){
-            
+            $brand->subcategory_id = $request->subcategory_id;
            $brand->name = $request->name;
             $brand->update();
 

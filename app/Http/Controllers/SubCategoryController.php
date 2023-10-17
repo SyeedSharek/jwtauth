@@ -99,7 +99,7 @@ class SubCategoryController extends Controller
     
             if ($subcategories) {
                 return response()->json([
-                    'categories' => $subcategories
+                    'subcategories' => $subcategories
     
                 ], 200);
             } else {
